@@ -70,8 +70,6 @@ else
     info "Existing 'accept.txt' found. Skipping."
 fi
 
-
-
 # 4. Handle Makefiles
 info "Updating Makefiles..."
 # Always overwrite Makefile.docs to ensure the latest doc targets are present.
@@ -125,6 +123,8 @@ if grep -qF "$GITIGNORE_START_MARKER" .gitignore 2>/dev/null; then
 fi
 
 echo -e "\n$FULL_GITIGNORE_BLOCK" >> .gitignore
+# clean up the whole file by squashing consecutive blank lines into one.
+cat -s .gitignore > .gitignore.tmp && mv .gitignore.tmp .gitignore
 info ".gitignore has been updated."
 
 
