@@ -44,7 +44,7 @@ if [ -f ".custom_wordlist.txt" ]; then
   read -r response
   if [[ "$response" =~ ^[Yy]$ ]]; then
     info "Migrating words from .custom_wordlist.txt..."
-    cat ".custom_wordlist.txt" >> "$TMP_DIR/.vale/config/vocabularies/local/accept.txt"
+    cat ".custom_wordlist.txt" >> "$TMP_DIR/.vale/styles/config/vocabularies/local/accept.txt"
     ask "Wordlist migrated. Would you like to remove the old '.custom_wordlist.txt' file? (y/n)"
     read -r del_response
     if [[ "$del_response" =~ ^[Yy]$ ]]; then
@@ -57,10 +57,10 @@ fi
 # 3. Copy over the core, non-conflicting files
 info "Copying Vale configuration and GitHub workflow..."
 mkdir -p .github/workflows
-mkdir -p .vale/config/vocabularies/local
+mkdir -p .vale/styles/config/vocabularies/local
 cp "$TMP_DIR"/.github/workflows/docs.yaml .github/workflows/
 cp "$TMP_DIR"/.vale.ini .
-cp "$TMP_DIR"/.vale/config/vocabularies/local/accept.txt .vale/config/vocabularies/local/
+cp "$TMP_DIR"/.vale/styles/config/vocabularies/local/accept.txt .vale/styles/config/vocabularies/local/
 
 
 # 4. Handle Makefiles
