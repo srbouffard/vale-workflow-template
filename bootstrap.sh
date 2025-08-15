@@ -15,6 +15,7 @@ GITIGNORE_END_MARKER="# END VALE WORKFLOW IGNORE"
 info() { echo -e "\033[34mINFO\033[0m: $1"; }
 ask() { echo -e "\033[33mACTION\033[0m: $1"; }
 success() { echo -e "\033[32mSUCCESS\033[0m: $1"; }
+errmsg() { echo -e "\033[31mERROR\033[0m: $1"; }
 
 # --- Main Script ---
 
@@ -60,7 +61,15 @@ mkdir -p .github/workflows
 mkdir -p .vale/styles/config/vocabularies/local
 cp "$TMP_DIR"/.github/workflows/docs.yaml .github/workflows/
 cp "$TMP_DIR"/.vale.ini .
-cp "$TMP_DIR"/.vale/styles/config/vocabularies/local/accept.txt .vale/styles/config/vocabularies/local/
+
+# Conditionally copy accept.txt
+if [ ! -f ".vale/config/vocabularies/local/accept.txt" ]; then
+    info "No local 'accept.txt' found. Creating a new one from template."
+    cp "$TMP_DIR"/.vale/styles/config/vocabularies/local/accept.txt .vale/styles/config/vocabularies/local/
+else
+    info "Existing 'accept.txt' found. Skipping."
+fi
+
 
 
 # 4. Handle Makefiles
