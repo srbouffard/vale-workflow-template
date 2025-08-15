@@ -63,7 +63,7 @@ cp "$TMP_DIR"/.github/workflows/docs.yaml .github/workflows/
 cp "$TMP_DIR"/.vale.ini .
 
 # Conditionally copy accept.txt
-if [ ! -f ".vale/config/vocabularies/local/accept.txt" ]; then
+if [ ! -f ".vale/styles/config/vocabularies/local/accept.txt" ]; then
     info "No local 'accept.txt' found. Creating a new one from template."
     cp "$TMP_DIR"/.vale/styles/config/vocabularies/local/accept.txt .vale/styles/config/vocabularies/local/
 else
